@@ -7,4 +7,4 @@ Summarizing the foundational data management, processing, and analysis steps we 
 ## Basecalling
 ## Mapping to a human genome reference
 ## Checking for sample swaps (case specific)
-
+# Variant calling
