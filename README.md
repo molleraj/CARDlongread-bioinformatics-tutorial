@@ -3,7 +3,7 @@ Summarizing the foundational data management, processing, and analysis steps we 
 # Data management
 ## Data transfer from the PromethIONs
 ## Raw data sequencing QC
-We use a set of two Python scripts to collect critical quality control parameters for weekly and cohort-wide sequencing runs, such as read N50, per flow cell output, experiment output, and flow cell starting active pores. More details can be found here: https://github.com/NIH-CARD/longread-report-parser
+We use a set of two Python scripts to collect critical quality control parameters for weekly and cohort-wide sequencing runs, such as read N50, per flow cell output, experiment output, and flow cell starting active pores. More details can be found here: https://github.com/molleraj/longread-report-parser
 # Data processing
 ## Sample sheet
 The next downstream three steps depend upon a samplesheet file with a list of sample names and flow cells. This is a headerless (no column names) TSV file with sample names in the first column and flow cells in the second.
