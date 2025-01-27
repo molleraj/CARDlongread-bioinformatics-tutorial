@@ -2,9 +2,9 @@
 Summarizing the foundational data management, processing, and analysis steps we do in the NIA CARD LRS group.
 # Data management
 ## Data transfer from the PromethIONs
-We move raw ONT runs from the PromethIONs to Biowulf using Globus. We have Globus endpoints set up on each 
+We move raw ONT runs from the PromethIONs to Biowulf using Globus. We have Globus endpoints set up on each PromethION using Globus Connect Personal (https://www.globus.org/globus-connect-personal).
 ## Data backup to Google Cloud storage
-While basecalling
+While basecalling raw POD5 ONT data on Biowulf (see later in the tutorial), we also archive this data to the coldest-storage archival bucket on Google Cloud Platform.
 ## Raw data sequencing QC
 We use a set of two Python scripts to collect critical quality control parameters for weekly and cohort-wide sequencing runs, such as read N50, per flow cell output, experiment output, and flow cell starting active pores. More details can be found here: https://github.com/molleraj/longread-report-parser
 # Data processing
@@ -22,7 +22,10 @@ Chile_516	PAW71977
 ## Data organization per cohort
 ## Basecalling
 We basecall raw ONT data in POD5 format to unmapped BAMs using the ONT basecaller dorado. We currently use version 0.9.0 with the R10.4.1 E8.2 400bps super-accurate basecalling model. We also call 5mC/5hmC modification in the process.
+
+To ensure basecalling completes
 ## Mapping to a human genome reference
+We map all reads to the human genome reference GRCh38 using minimap2
 ## Checking for sample swaps (case specific)
 # Variant calling
 ## Single nucleotide variants (SNVs)
