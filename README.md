@@ -37,3 +37,7 @@ We map all reads to the human genome reference GRCh38 using minimap2 before chec
 | Data processing step | Dependencies | Memory | CPUs | GPUs | Local scratch | 
 | -------------------- | ------------ | ------ | ---- | ---- | ------------- |
 | Basecalling | Dorado 0.9.0 | 120 GB | 30 | 2 A100 | 50GB |
+| Mapping | Minimap2 2.28 | | | |
+| SNV calling |
+| STR calling | 
+| SV calling |
