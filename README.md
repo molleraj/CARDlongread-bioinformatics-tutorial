@@ -33,3 +33,4 @@ We map all reads to the human genome reference GRCh38 using minimap2 before chec
 ## Structural variants (SVs)
 ## Merging variant calls
 ## Annotating variant calls
+## Compute resource use summary
