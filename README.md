@@ -23,9 +23,9 @@ Chile_516	PAW71977
 ## Basecalling
 We basecall raw ONT data in POD5 format to unmapped BAMs using the ONT basecaller dorado. We currently use version 0.9.0 with the R10.4.1 E8.2 400bps super-accurate basecalling model. We also call 5mC/5hmC modification in the process.
 
-To ensure basecalling completes
+To ensure basecalling completes correctly, we compare the sizes of POD5s to corresponding unmapped BAMs to ensure they all fall along a line.
 ## Mapping to a human genome reference
-We map all reads to the human genome reference GRCh38 using minimap2
+We map all reads to the human genome reference GRCh38 using minimap2 before checking for sample swaps and calling variants.
 ## Checking for sample swaps (case specific)
 # Variant calling
 ## Single nucleotide variants (SNVs)
