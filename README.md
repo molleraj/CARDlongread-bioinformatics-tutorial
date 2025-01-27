@@ -21,7 +21,7 @@ Chile_516	PAW71977
 ```
 ## Data organization per cohort
 ## Basecalling
-We basecall raw
+We basecall raw ONT data in POD5 format to unmapped BAMs using the ONT basecaller dorado. We currently use version 0.9.0 with the R10.4.1 E8.2 400bps super-accurate basecalling model. We also call 5mC/5hmC modification in the process.
 ## Mapping to a human genome reference
 ## Checking for sample swaps (case specific)
 # Variant calling
