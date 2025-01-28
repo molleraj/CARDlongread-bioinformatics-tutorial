@@ -9,7 +9,7 @@ While basecalling raw POD5 ONT data on Biowulf (see later in the tutorial), we a
 We use a set of two Python scripts to collect critical quality control parameters for weekly and cohort-wide sequencing runs, such as read N50, per flow cell output, experiment output, and flow cell starting active pores. More details can be found here: https://github.com/molleraj/longread-report-parser
 # Data processing
 ## Sample sheet
-The next downstream three steps depend upon a samplesheet file with a list of sample names and flow cells. This is a headerless (no column names) TSV file with sample names in the first column and flow cells in the second.
+The next downstream three steps depend upon a samplesheet file with a list of sample names and flow cells. This is a headerless (no column names) TSV file with sample names in the first column and flow cells in the second. This can be prepared from the sequencing QC TSV output shown above like so:
 
 Here is an example:
 ```
@@ -20,6 +20,18 @@ Chile_511	PAW71368
 Chile_516	PAW71977
 ```
 ## Data organization per cohort
+We inititially transfer raw ONT data to cohort folders (e.g., /data/CARDPB/data/RUSH) and then organize this data in the following manner (modified output of tree -d -L 2 in the cohort directory):
+.
+├── POD5
+│   └── UAB_ADC006
+│       └── PAY16825
+├── SCRIPTS
+└── SEQ_REPORTS
+    └── UAB_ADC006
+        └── PAY16825
+
+Scripts for data processing and analysis are placed in the SCRIPTS subdirectory, while raw POD5s and sequencing reports from each run are moved into further sample name and flow cell ID nested subdirectories (e.g., POD5/UAB_ADC006/PAY16825). This is the directory structure used to guide downstream data processing steps (basecalling, mapping, and variant calling).
+
 ## Basecalling
 We basecall raw ONT data in POD5 format to unmapped BAMs using the ONT basecaller dorado. We currently use version 0.9.0 with the R10.4.1 E8.2 400bps super-accurate basecalling model. We also call 5mC/5hmC modification in the process.
 
