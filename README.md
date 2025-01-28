@@ -41,7 +41,9 @@ To ensure basecalling completes correctly, we compare the sizes of POD5s to corr
 ## Mapping to a human genome reference
 We map all reads to the human genome reference GRCh38 using minimap2 before checking for sample swaps and calling variants.
 ## Checking for sample swaps (case specific)
+Depending upon cohort, we check for sample swaps at both the initial flow cell and merged sample levels. The sample swap calling procedure depends upon first subsetting samples' mapped reads per chromosome, calling single nucleotide variants from these subsets in relatively fast manner with Clair3, concatenating variant calls per sample, merging sample variant calls with corresponding short read variant calls, and then creating a king table with Plink2.
 # Variant calling
+We then use the genome alignment mappings to call a number of different variants, including single nucleotide variants (SNVs), short tandem repeats (STRs), and structural variants (SVs), using methods further described below.
 ## Single nucleotide variants (SNVs)
 ## Short tandem repeats (STRs)
 ## Structural variants (SVs)
@@ -52,6 +54,6 @@ We map all reads to the human genome reference GRCh38 using minimap2 before chec
 | -------------------- | ------------ | ------ | ---- | ---- | ------------- |
 | Basecalling | Dorado 0.9.0 | 120GB | 30 | 2 A100 | 50GB |
 | Mapping | Minimap2 2.28 | | | |
-| SNV calling | | | | 
-| STR calling | | | |
-| SV calling | | | |
+| SNV calling | DeepVariant 1.8.0 | | | 
+| STR calling | Vamos | | |
+| SV calling | Sniffles | | |
