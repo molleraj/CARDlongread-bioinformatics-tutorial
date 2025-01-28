@@ -9,6 +9,17 @@ While basecalling raw POD5 ONT data on Biowulf (see later in the tutorial), we a
 We use a set of two Python scripts to collect critical quality control parameters for weekly and cohort-wide sequencing runs, such as read N50, per flow cell output, experiment output, and flow cell starting active pores. More details can be found here: https://github.com/molleraj/longread-report-parser
 
 Below are sample commands for running the sequencing report parser on a set of JSONs to generate a summary table and the QC dashboard script to create a spreadsheet containing a number of tables and 1D/2D visualizations of key QC measures like read N50, run data output, and starting active pores (initial count of pores available for sequencing).
+```
+# Execute with file list of json reports (one per line):
+python3 CARDlongread_extract_from_json.py --filelist example_json_reports.txt --output example_output.tsv
+
+# Alternatively, execute on all json files within a directory
+# (does not descend into subdirectories)
+python3 CARDlongread_extract_from_json.py --json_dir /data/CARDPB/data/PPMI/SEQ_REPORTS/example_json_reports/ --output example_output.tsv
+
+# Make sequencing QC analytics spreadsheet from above QC output table (example_output.tsv)
+python3 CARDlongread_extract_summary_statistics.py -input example_output.tsv -output example_summary_spreadsheet.xlsx -platform_qc example_platform_qc.csv -plot_title "PPMI tutorial example"
+```
 # Data processing
 ## Sample sheet
 The next downstream three steps depend upon a samplesheet file with a list of sample names and flow cells. This is a headerless (no column names) TSV file with sample names in the first column and flow cells in the second. This can be prepared from the sequencing QC TSV output shown above like so:
