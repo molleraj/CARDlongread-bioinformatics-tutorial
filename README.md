@@ -52,8 +52,8 @@ We then use the genome alignment mappings to call a number of different variants
 ## Compute resource use summary
 | Data processing step | Dependencies | Memory | CPUs | GPUs | Local scratch | Time allocation | 
 | -------------------- | ------------ | ------ | ---- | ---- | ------------- | --------------- |
-| Basecalling | Dorado 0.9.0 | 120GB | 30 | 2 A100 | 50GB | |
-| Mapping | Minimap2 2.28 | 120GB | 40 | | |
+| Basecalling | Dorado 0.9.0 | 120GB | 30 | 2 A100 | 50GB | 2 days |
+| Mapping | Minimap2 2.28 | 120GB | 40 | | 1 day |
 | SNV calling | DeepVariant 1.8.0 | | | | 
 | STR calling | Vamos 2.1.5 | | | | 
 | SV calling | Sniffles 2.5.3 | | | |
