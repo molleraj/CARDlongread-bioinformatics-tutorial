@@ -40,15 +40,21 @@ We basecall raw ONT data in POD5 format to unmapped BAMs using the ONT basecalle
 To ensure basecalling completes correctly, we compare the sizes of POD5s to corresponding unmapped BAMs to ensure they all fall along a line. We have previously done this by making a list of POD5 input and UBAM output sizes in kilobytes and plotting the input against the output sizes in Excel. Currently we are developing a python script to both prepare input and output size lists and then to find outliers relative to the regression line.  
 ## Mapping to a human genome reference
 We map all reads to the human genome reference GRCh38 using minimap2 before checking for sample swaps and calling variants.
+To perform basic QC after mapping, we use the tool cramino from the package nanopack (https://github.com/wdecoster/nanopack), which is available as a module on Biowulf.
 ## Checking for sample swaps (case specific)
-Depending upon cohort, we check for sample swaps at both the initial flow cell and merged sample levels. The sample swap calling procedure depends upon first subsetting samples' mapped reads per chromosome, calling single nucleotide variants from these subsets in relatively fast manner with Clair3, concatenating variant calls per sample, merging sample variant calls with corresponding short read variant calls, and then creating a king table with Plink2.
+Depending upon cohort, we check for sample swaps at both the initial flow cell and merged sample levels through whole genome alignment and variant calling. The sample swap calling procedure depends upon first subsetting samples' mapped reads per chromosome, calling single nucleotide variants from these subsets in relatively fast manner with Clair3, concatenating variant calls per sample, merging sample variant calls with corresponding short read variant calls, and then creating a king table with Plink2.
 # Variant calling
-We then use the genome alignment mappings to call a number of different variants, including single nucleotide variants (SNVs), short tandem repeats (STRs), and structural variants (SVs), using methods further described below.
+We then use the long read genome alignment mappings to call a number of different variants, including single nucleotide variants (SNVs), short tandem repeats (STRs), and structural variants (SVs), using methods further described below.
 ## Single nucleotide variants (SNVs)
+We call single nucleotide variants from long read alignments with several different tools, including Clair3, DeepVariant, and PEPPER-Margin-DeepVariant (PMDV).
 ## Short tandem repeats (STRs)
+We call short tandem repeats from long read alignments using Vamos.
 ## Structural variants (SVs)
+We call structural variants from long read alignments using Sniffles.
 ## Merging variant calls
+Variant call merging depends upon variant type.
 ## Annotating variant calls
+Like merging, we annotate variant calls with different tools depending upon variant type.
 ## Compute resource use summary
 | Data processing step | Dependencies | Memory | CPUs | GPUs | Local scratch | Time allocation | 
 | -------------------- | ------------ | ------ | ---- | ---- | ------------- | --------------- |
