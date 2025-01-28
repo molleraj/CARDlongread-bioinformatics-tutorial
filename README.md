@@ -21,6 +21,7 @@ Chile_516	PAW71977
 ```
 ## Data organization per cohort
 We inititially transfer raw ONT data to cohort folders (e.g., /data/CARDPB/data/RUSH) and then organize this data in the following manner (modified output of tree -d -L 2 in the cohort directory):
+```
 .
 ├── POD5
 │   └── UAB_ADC006
@@ -29,6 +30,7 @@ We inititially transfer raw ONT data to cohort folders (e.g., /data/CARDPB/data/
 └── SEQ_REPORTS
     └── UAB_ADC006
         └── PAY16825
+```
 
 Scripts for data processing and analysis are placed in the SCRIPTS subdirectory, while raw POD5s and sequencing reports from each run are moved into further sample name and flow cell ID nested subdirectories (e.g., POD5/UAB_ADC006/PAY16825). This is the directory structure used to guide downstream data processing steps (basecalling, mapping, and variant calling).
 
