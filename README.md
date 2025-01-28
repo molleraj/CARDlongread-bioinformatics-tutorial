@@ -7,6 +7,8 @@ We move raw ONT runs from the PromethIONs to Biowulf using Globus. We have Globu
 While basecalling raw POD5 ONT data on Biowulf (see later in the tutorial), we also archive this data to the coldest-storage archival bucket on Google Cloud Platform. We transfer this data to Google Cloud through the Google Cloud Platform endpoint NIH HPC provides on Globus.
 ## Raw data sequencing QC
 We use a set of two Python scripts to collect critical quality control parameters for weekly and cohort-wide sequencing runs, such as read N50, per flow cell output, experiment output, and flow cell starting active pores. More details can be found here: https://github.com/molleraj/longread-report-parser
+
+Below are sample commands for running the sequencing report parser on a set of JSONs to generate a summary table and the QC dashboard script to create a spreadsheet containing a number of tables and 1D/2D visualizations of key QC measures like read N50, run data output, and starting active pores (initial count of pores available for sequencing).
 # Data processing
 ## Sample sheet
 The next downstream three steps depend upon a samplesheet file with a list of sample names and flow cells. This is a headerless (no column names) TSV file with sample names in the first column and flow cells in the second. This can be prepared from the sequencing QC TSV output shown above like so:
