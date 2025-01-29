@@ -63,11 +63,11 @@ Depending upon cohort, we check for sample swaps at both the initial flow cell a
 # Variant calling
 We then use the long read genome alignment mappings to call a number of different variants, including single nucleotide variants (SNVs), short tandem repeats (STRs), and structural variants (SVs), using methods further described below.
 ## Single nucleotide variants (SNVs)
-We call single nucleotide variants from long read alignments with several different tools, including Clair3, DeepVariant, and PEPPER-Margin-DeepVariant (PMDV).
+We call single nucleotide variants from long read alignments with several different tools, including Clair3 (https://github.com/HKU-BAL/Clair3), DeepVariant (https://github.com/google/deepvariant), and PEPPER-Margin-DeepVariant (PMDV) (https://github.com/kishwarshafin/pepper). We have found through testing that either flow cell or merged sample (multiple flow cells combined) level alignment data should be subsetted by each chromosome in order to increase job throughput on the NIH HPC cluster and maintain reasonable resource (especially RAM) use on the nodes of the norm partition.
 ## Short tandem repeats (STRs)
-We call short tandem repeats from long read alignments using Vamos.
+We call short tandem repeats from long read alignments using Vamos (https://github.com/ChaissonLab/vamos). This is provided in a singularity container by the Chaisson lab.
 ## Structural variants (SVs)
-We call structural variants from long read alignments using Sniffles.
+We call structural variants from long read alignments using Sniffles (https://github.com/fritzsedlazeck/Sniffles). We first call variants in individual samples as Sniffles (SNF) output and then merge SNF files into a single VCF, also using Sniffles.
 ## Merging variant calls
 Variant call merging depends upon variant type.
 ## Annotating variant calls
