@@ -77,6 +77,6 @@ Like merging, we annotate variant calls with different tools depending upon vari
 | -------------------- | ------------ | ------ | ---- | ---- | ------------- | --------------- |
 | Basecalling | Dorado 0.9.0, pod5 0.3.6 | 120GB | 30 | 2 A100 | 50GB | 2 days |
 | Mapping | Minimap2 2.28, samtools 1.21 | 120GB | 40 | n/a | n/a | 1 day |
-| SNV calling | DeepVariant 1.8.0, singularity | 64GB | 16 | n/a | 50GB | 1 day |
-| STR calling | Vamos 2.1.5, singularity | | | | 
+| SNV calling | DeepVariant 1.8.0, singularity 4.1.5| 64GB | 16 | n/a | 50GB | 1 day |
+| STR calling | Vamos 2.1.5, singularity 4.1.5 | 32GB | 16 | n/a | n/a | 6 hours | 
 | SV calling | Sniffles 2.5.3 | | | |
