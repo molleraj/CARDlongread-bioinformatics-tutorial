@@ -9,7 +9,7 @@
 # get array job number for spooling subjobs
 N=${SLURM_ARRAY_TASK_ID}
 # tab delimited file with list of samples and flow cells in columns 1 and 2
-SAMPLE_SHEET='/data/CARD_AUX/LRS_temp/CHILE/SCRIPTS/CHILE_SAMPLE_FLOWCELL.tsv'
+SAMPLE_SHEET='/path/to/samplesheet'
 SAMPLE_ID=$(sed -n ${N}p $SAMPLE_SHEET| cut -f 1)
 # FLOWCELL=$(sed -n ${N}p $SAMPLE_SHEET | cut -f 2)
 
@@ -20,7 +20,7 @@ echo "SAMPLE_ID ${SAMPLE_ID}"
 
 # load sniffles version 2.5.3
 ml sniffles/2.5.3
-BASE_DIR=/data/CARD_AUX/LRS_temp/CHILE
+BASE_DIR=/data/CARDPB/data/cohort
 
 # make snf output directory and parents if necessary
 mkdir -p ${BASE_DIR}/Sniffles/snf
