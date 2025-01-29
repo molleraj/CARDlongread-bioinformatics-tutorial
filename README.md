@@ -23,8 +23,12 @@ python3 CARDlongread_extract_summary_statistics.py -input example_output.tsv -ou
 # Data processing
 ## Sample sheet
 The next downstream three steps depend upon a samplesheet file with a list of sample names and flow cells. This is a headerless (no column names) TSV file with sample names in the first column and flow cells in the second. This can be prepared from the sequencing QC TSV output shown above like so:
+```
+tail -n +2 example_output.tsv | cut -f1,6
+```
+The command above removes the output table header and then extracts column 1 and 6 of the output table (sample name and flow cell ID).
 
-Here is an example:
+Here is an example sample sheet to be used with downstream analyses:
 ```
 Chile_404	PAW33034
 Chile_406	PAW73369
