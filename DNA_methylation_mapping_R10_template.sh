@@ -5,28 +5,36 @@
 #SBATCH --time=24:00:00
 
 #NEED TO CHANGE HERE
-BASE_DIR=/data/CARDPB/data/RUSH
-DEST_DIR=/data/CARD_AUX/LRS_temp/RUSH
-SAMPLE_SHEET='/data/CARDPB/data/RUSH/SCRIPTS/RUSH_SAMPLE_FLOWCELL_UNIQUE_PAIRS_112724.tsv'
+# base directory
+BASE_DIR=/data/CARDPB/data/cohort
+# in this case, also provide destination directory
+DEST_DIR=/data/CARD_AUX/LRS_temp/cohort
+# tab delimited file with list of samples and flow cells in columns 1 and 2
+SAMPLE_SHEET='/path/to/samplesheet'
 
 # add merged BAM directory
 # mkdir -p ${BASE_DIR}/ONT_UBAM/
 
+# get array job number for spooling subjobs
 N=${SLURM_ARRAY_TASK_ID}
 
+# first column is sample id (e.g., RUSH_001_FTX)
 SAMPLE_ID=$(sed -n ${N}p $SAMPLE_SHEET | cut -f 1)
+# second column is flow cell (e.g., PAY78456)
 FLOWCELL=$(sed -n ${N}p $SAMPLE_SHEET | cut -f 2)
 
-
+# debugging output to slurm script
 echo "Job Array #${N}"
 echo "SAMPLE_ID ${SAMPLE_ID}"
 echo "FLOWCELL ${FLOWCELL}"
 
-
+# debugging output
 echo "map with minimap2"
+# load modules (newest versions)
 module load minimap2
 module load samtools
 
+# make output directory and parent if necessary
 mkdir -p ${DEST_DIR}/MAPPED_BAM/${SAMPLE_ID}
 
 # index input unmapped BAM

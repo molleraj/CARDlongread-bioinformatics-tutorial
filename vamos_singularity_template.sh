@@ -5,7 +5,7 @@
 
 N=${SLURM_ARRAY_TASK_ID}
 SAMPLE_SHEET='/data/CARD_AUX/LRS_temp/CHILE/SCRIPTS/CHILE_SAMPLE_FLOWCELL.tsv'
-SAMPLE_ID=$(cut -f1 $SAMPLE_SHEET | sort | uniq | sed -n ${N}p)
+SAMPLE_ID=$(cut -f1 $SAMPLE_SHEET | sed -n ${N}p)
 # FLOWCELL=$(sed -n ${N}p $SAMPLE_SHEET | cut -f 2)
 
 echo "Job Array #${N}"
@@ -32,6 +32,7 @@ export SINGULARITY_BINDPATH="/data/CARD_AUX/LRS_temp/CHILE/VAMOS,/data/CARD_AUX/
 # /data/CARDPB/data/NABEC/repeat_expression/vntrs_motifs_delta_0.2.bed >> suggested to use for motif _analysis from Dr.Mark Chaisson.
 # /data/CARD/FOUNDINtemp/LRS_QTLs/vamos_expression/references_vntr_annotations_q-0.1_motifs.tsv   >> in Terra NABEC samples/
 
+# run with 4 threads
 singularity exec $VAMOS vamos --read -b ${BAM} \
 -r /data/CARDPB/data/adaptive_sampling/Madison_repeat/VAMOS/vamos.motif.hg38.v2.1.e0.1.tsv \
 -s ${SAMPLENAME} \

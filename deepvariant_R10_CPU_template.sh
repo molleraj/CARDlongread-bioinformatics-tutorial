@@ -8,21 +8,26 @@
 #SBATCH --gres=lscratch:50
 
 N=${SLURM_ARRAY_TASK_ID}
+# note this has a different structure from a typical sample sheet
+# list of subsetted BAM files
 SAMPLE_SHEET='/data/CARDPB/data/PPMI/scripts/PPMI_samples_per_chromosome_112224.txt'
 BAM_SUBSET=$(sed -n ${N}p $SAMPLE_SHEET)
 SAMPLE_ID=$(sed -n ${N}p $SAMPLE_SHEET | cut -f1 -d'.')
 CHROMOSOME=$(sed -n ${N}p $SAMPLE_SHEET | cut -f2 -d'.')
 
+# debugging output
 echo "Job Array #${N}"
 echo "BAM_SUBSET ${BAM_SUBSET}"
 echo "SAMPLE_ID ${SAMPLE_ID}"
 echo "CHROMOSOME ${CHROMOSOME}"
 
+# specify base directory
 BASE_DIR=/data/CARDPB/data/PPMI
 
 # module load singularity
 module load deepvariant/1.8.0
 
+# make DEEPVARIANT output folder and parents if necessary
 mkdir -p ${BASE_DIR}/DEEPVARIANT
 
 # use per sample per chromosome subsetted BAMs
@@ -32,6 +37,7 @@ SAMPLE_PREFIX=${SAMPLE_ID}
 # deepvariant docker image version
 # BIN_VERSION="1.8.0-gpu"
 
+# make output directory and parent if necessary
 mkdir -p ${OUT_FOLDER}
 # cp -r $PEPPER_DATA/* .
 # use local singularity/docker image
@@ -39,6 +45,8 @@ mkdir -p ${OUT_FOLDER}
 # change to local instance of docker image
 # singularity run --nv -B /usr/lib/locale/:/usr/lib/locale/ \
 # /data/mollerabg/deepvariant/deepvariant_1.8.0-gpu.sif \
+
+# removed docker image described above. now use built-in biowulf module
 run_deepvariant \
 --model_type=ONT_R104 \
 --ref=/data/CARDPB/resources/hg38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fa \
