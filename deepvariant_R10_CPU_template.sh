@@ -10,7 +10,7 @@
 N=${SLURM_ARRAY_TASK_ID}
 # note this has a different structure from a typical sample sheet
 # list of subsetted BAM files
-SAMPLE_SHEET='/data/CARDPB/data/PPMI/scripts/PPMI_samples_per_chromosome_112224.txt'
+SAMPLE_SHEET='/path/to/samplesheet'
 BAM_SUBSET=$(sed -n ${N}p $SAMPLE_SHEET)
 SAMPLE_ID=$(sed -n ${N}p $SAMPLE_SHEET | cut -f1 -d'.')
 CHROMOSOME=$(sed -n ${N}p $SAMPLE_SHEET | cut -f2 -d'.')
@@ -22,7 +22,7 @@ echo "SAMPLE_ID ${SAMPLE_ID}"
 echo "CHROMOSOME ${CHROMOSOME}"
 
 # specify base directory
-BASE_DIR=/data/CARDPB/data/PPMI
+BASE_DIR=/data/CARDPB/data/cohort
 
 # module load singularity
 module load deepvariant/1.8.0
