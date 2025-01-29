@@ -79,4 +79,4 @@ Like merging, we annotate variant calls with different tools depending upon vari
 | Mapping | Minimap2 2.28, samtools 1.21 | 120GB | 40 | n/a | n/a | 1 day |
 | SNV calling | DeepVariant 1.8.0, singularity 4.1.5| 64GB | 16 | n/a | 50GB | 1 day |
 | STR calling | Vamos 2.1.5, singularity 4.1.5 | 32GB | 16 | n/a | n/a | 6 hours | 
-| SV calling | Sniffles 2.5.3 | | | |
+| SV calling | Sniffles 2.5.3 | 16GB | 16 | n/a | n/a | 1 hour |
