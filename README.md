@@ -1,4 +1,4 @@
-# NIA CARD Long read sequencing group bioinformatics tutorial
+# NIA CARD long read sequencing group bioinformatics tutorial
 Summarizing the foundational data management, processing, and analysis steps we do in the NIA CARD LRS group.
 # Data management
 ## Data transfer from the PromethIONs
