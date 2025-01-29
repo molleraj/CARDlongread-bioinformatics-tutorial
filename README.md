@@ -73,10 +73,11 @@ Variant call merging depends upon variant type.
 ## Annotating variant calls
 Like merging, we annotate variant calls with different tools depending upon variant type.
 ## Compute resource use summary
+The estimates below are based on one 30x coverage sample (except for SNV calling - 1 sample alignment subsetted for a particular choromosome) and are generous especially concerning time (i.e., more resources provided than necessary).
 | Data processing step | Dependencies | Memory | CPUs | GPUs | Local scratch | Time allocation | 
 | -------------------- | ------------ | ------ | ---- | ---- | ------------- | --------------- |
 | Basecalling | Dorado 0.9.0, pod5 0.3.6 | 120GB | 30 | 2 A100 | 50GB | 2 days |
 | Mapping | Minimap2 2.28, samtools 1.21 | 120GB | 40 | n/a | n/a | 1 day |
-| SNV calling | DeepVariant 1.8.0, singularity 4.1.5| 64GB | 16 | n/a | 50GB | 1 day |
+| SNV calling | DeepVariant 1.8.0, singularity 4.1.5 | 64GB | 16 | n/a | 50GB | 1 day |
 | STR calling | Vamos 2.1.5, singularity 4.1.5 | 32GB | 16 | n/a | n/a | 6 hours | 
 | SV calling | Sniffles 2.5.3 | 16GB | 16 | n/a | n/a | 1 hour |
