@@ -77,11 +77,11 @@ optional arguments:
 ```
 
 Here are example scatterplots with the regression and standardized residuals:
-
-![image](https://github.com/user-attachments/assets/f9c6fc8e-4d6b-4fb0-8766-eb3eb3b99d91|width=720)
-
-![image](https://github.com/user-attachments/assets/a9e40ccc-c8af-4796-a100-61bebffac95b|width=720)
-
+<br></br>
+<img src="https://github.com/user-attachments/assets/f9c6fc8e-4d6b-4fb0-8766-eb3eb3b99d91" width=720></img>
+<br></br>
+<img src="https://github.com/user-attachments/assets/a9e40ccc-c8af-4796-a100-61bebffac95b" width=720></img>
+<br></br>
 The red lines mark z-scores of 2 above and below the expected value, while the gray line marks a z-score of 0 (expected value based on the regression line).
 
 ## Mapping to a human genome reference
