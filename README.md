@@ -76,6 +76,14 @@ optional arguments:
                         Title for output plot (optional)
 ```
 
+Here are example scatterplots with the regression and standardized residuals:
+
+![image](https://github.com/user-attachments/assets/f9c6fc8e-4d6b-4fb0-8766-eb3eb3b99d91)
+
+![image](https://github.com/user-attachments/assets/a9e40ccc-c8af-4796-a100-61bebffac95b)
+
+The red lines mark z-scores of 2 above and below the expected value, while the gray line marks a z-score of 0 (expected value based on the regression line).
+
 ## Mapping to a human genome reference
 We map all reads to the human genome reference GRCh38 using minimap2 before checking for sample swaps and calling variants.
 To perform basic QC after mapping, we use the tool cramino from the package nanopack (https://github.com/wdecoster/nanopack), which is available as a module on Biowulf.
