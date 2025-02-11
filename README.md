@@ -54,7 +54,26 @@ Scripts for data processing and analysis are placed in the SCRIPTS subdirectory,
 ## Basecalling
 We basecall raw ONT data in POD5 format to unmapped BAMs using the ONT basecaller dorado. We currently use version 0.9.0 with the R10.4.1 E8.2 400bps super-accurate basecalling model. We also call 5mC/5hmC modification in the process.
 
-To ensure basecalling completes correctly, we compare the sizes of POD5s to corresponding unmapped BAMs to ensure they all fall along a line. We have previously done this by making a list of POD5 input and UBAM output sizes in kilobytes and plotting the input against the output sizes in Excel. Currently we are developing a python script to both prepare input and output size lists and then to find outliers relative to the regression line.  
+To ensure basecalling completes correctly, we compare the sizes of POD5s to corresponding unmapped BAMs to ensure they all fall along a line. We have previously done this by making a list of POD5 input and UBAM output sizes in kilobytes and plotting the input against the output sizes in Excel. More recently we developed a Python script to both prepare input and output size lists and then to find outliers relative to the regression line. This script is included in the repository (CARDlongread_basecall_check.py). 
+
+The Python script for checking basecalling completion through linear regression can be used like so:
+```
+usage: CARDlongread_basecall_check.py [-h] [--pod5_path POD5_PATH] [--ubam_path UBAM_PATH] [--output OUTPUT] [--plot_title PLOT_TITLE]
+
+This program checks for basecalling completeness by comparing the sizes of input POD5 to output UBAM files. It outputs a scatterplot of POD5 and UBAM sizes and a table of outlier runs based on linear regression
+residuals.
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --pod5_path POD5_PATH
+                        Path to POD5 files/directories (to get POD5 per run directory sizes)
+  --ubam_path UBAM_PATH
+                        Path to UBAM files (to get UBAM per run directory sizes)
+  --output OUTPUT       Filename prefix for output files (optional)
+  --plot_title PLOT_TITLE
+                        Title for output plot (optional)
+```
+
 ## Mapping to a human genome reference
 We map all reads to the human genome reference GRCh38 using minimap2 before checking for sample swaps and calling variants.
 To perform basic QC after mapping, we use the tool cramino from the package nanopack (https://github.com/wdecoster/nanopack), which is available as a module on Biowulf.
