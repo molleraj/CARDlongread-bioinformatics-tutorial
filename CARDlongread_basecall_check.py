@@ -94,6 +94,10 @@ ax = sb.scatterplot(data=pod5_ubam_sizes_df,x="POD5 size",y="Standardized Residu
 ax.set(xlabel="POD5 size (kb)",ylabel="UBAM standardized residual (z-score)")
 if results.plot_title is not None:
     ax.set(title=results.plot_title)
+# add horizontal cutoffs for z scores of -2 (red), 0 (gray), and 2 (red)
+ax.axhline(y=-2,color="red")
+ax.axhline(y=0,color="gray")
+ax.axhline(y=2,color="red")
 fig.savefig(results.output + "_stdresidualplot.png", format='png', dpi=150, bbox_inches='tight')
 # close figure
 fig.clf()
