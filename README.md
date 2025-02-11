@@ -58,7 +58,7 @@ To ensure basecalling completes correctly, we compare the sizes of POD5s to corr
 
 The Python script for checking basecalling completion through linear regression can be used like so:
 ```
-usage: CARDlongread_basecall_check.py [-h] [--pod5_path POD5_PATH] [--ubam_path UBAM_PATH] [--output OUTPUT] [--plot_title PLOT_TITLE]
+usage: CARDlongread_basecall_check.py [-h] [--pod5_path POD5_PATH] [--ubam_path UBAM_PATH] [--input_table INPUT_TABLE] [--output OUTPUT] [--plot_title PLOT_TITLE]
 
 This program checks for basecalling completeness by comparing the sizes of input POD5 to output UBAM files. It outputs a scatterplot of POD5 and UBAM sizes and a table of outlier runs based on linear regression
 residuals.
@@ -69,6 +69,8 @@ optional arguments:
                         Path to POD5 files/directories (to get POD5 per run directory sizes)
   --ubam_path UBAM_PATH
                         Path to UBAM files (to get UBAM per run directory sizes)
+  --input_table INPUT_TABLE
+                        Input table with no header and following order of columns: POD5 size, POD5 name, UBAM size, UBAM name. Generate with du --block-size=1K.
   --output OUTPUT       Filename prefix for output files (optional)
   --plot_title PLOT_TITLE
                         Title for output plot (optional)
