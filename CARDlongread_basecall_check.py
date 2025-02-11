@@ -20,6 +20,7 @@ parser = argparse.ArgumentParser(description='This program checks for basecallin
 # get input and output arguments
 parser.add_argument('--pod5_path', action="store", type=str, help="Path to POD5 files/directories (to get POD5 per run directory sizes)")
 parser.add_argument('--ubam_path', action="store", type=str, help="Path to UBAM files (to get UBAM per run directory sizes)")
+parser.add_argument('--input_table', action="store", type=str, help="Input table with no header and following order of columns: POD5 size, POD5 name, UBAM size, UBAM name. Generate with du --block-size=1K.")
 parser.add_argument('--output', action="store", type=str, default=None, dest="output", help="Filename prefix for output files (optional)")
 parser.add_argument('--plot_title', action="store", type=str, default=None, dest="plot_title", help="Title for output plot (optional)")
 
@@ -28,27 +29,40 @@ results = parser.parse_args()
 # debugging output
 # print(results.pod5_path)
 # print(results.ubam_path)
+# print(results.input_table)
 
-# throw error if no input file provided
-if (results.pod5_path or results.ubam_path) is None:
+# throw error if no input provided
+if ((results.pod5_path is None) and (results.ubam_path is None) and (results.input_table is None)):
+	quit("ERROR: No input path or table provided!")
+# throw error if either pod5 path or ubam path not provided and input_table not provided
+if (((results.pod5_path is None) or (results.ubam_path is None)) and (results.input_table is None)):
 	quit("ERROR: Either POD5 (--pod5_path) or UBAM path (--ubam_path) wasn't provided!")
-        
+# warning message that paths are used instead of table if both paths and table provided
+if (results.pod5_path and results.ubam_path and results.input_table) is not None:
+    print("Both paths and input table provided. Using paths to get input/output sizes.")
+    
 # set default output filename
 if results.output is None:
     results.output='output_basecall_check'
 
-# read pod5 sizes into data frame
-pod5_sizes_string = sh.du("--block-size=1K", sh.glob(results.pod5_path + "/*/*"))
-pod5_sizes_df = pd.read_csv(StringIO(pod5_sizes_string),sep='\t',header=None)
-# read ubam sizes into data frame
-ubam_sizes_string = sh.du("--block-size=1K", sh.glob(results.ubam_path + "/*/*.bam"))
-ubam_sizes_df = pd.read_csv(StringIO(ubam_sizes_string),sep='\t',header=None)
-# compare pod5 and ubam size tables to make sure they have the same number of rows
-# if not identical, quit with the respective error
-if pod5_sizes_df.shape[0] != ubam_sizes_df.shape[0]:
-    quit('Error: POD5 and UBAM size lists are different lengths! Try again.')
-# make combined data frame
-pod5_ubam_sizes_df = pd.concat((pod5_sizes_df,ubam_sizes_df),axis=1,ignore_index=True)
+# control stucture determining how to make POD5/UBAM data frame for analysis
+if (results.pod5_path and results.ubam_path) is not None:
+    # read pod5 sizes into data frame
+    pod5_sizes_string = sh.du("--block-size=1K", sh.glob(results.pod5_path + "/*/*"))
+    pod5_sizes_df = pd.read_csv(StringIO(pod5_sizes_string),sep='\t',header=None)
+    # read ubam sizes into data frame
+    ubam_sizes_string = sh.du("--block-size=1K", sh.glob(results.ubam_path + "/*/*.bam"))
+    ubam_sizes_df = pd.read_csv(StringIO(ubam_sizes_string),sep='\t',header=None)
+    # compare pod5 and ubam size tables to make sure they have the same number of rows
+    # if not identical, quit with the respective error
+    if pod5_sizes_df.shape[0] != ubam_sizes_df.shape[0]:
+        quit('Error: POD5 and UBAM size lists are different lengths! Try again.')
+    # make combined data frame
+    pod5_ubam_sizes_df = pd.concat((pod5_sizes_df,ubam_sizes_df),axis=1,ignore_index=True)
+# what to do if input table but not pod5/ubam paths
+elif results.input_table is not None:
+    # read data frame from table variable
+    pod5_ubam_sizes_df = pd.read_csv(results.input_table,sep="\t",header=None)
 # rename columns to make their names meaningful
 pod5_ubam_sizes_df = pod5_ubam_sizes_df.rename(columns={0: "POD5 size", 1: "POD5 name", 2: "UBAM size", 3: "UBAM name"})
 # calculate POD5/UBAM ratio
