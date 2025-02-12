@@ -23,13 +23,14 @@ parser.add_argument('--ubam_path', action="store", type=str, help="Path to UBAM 
 parser.add_argument('--input_table', action="store", type=str, help="Input table with no header and following order of columns: POD5 size, POD5 name, UBAM size, UBAM name. Generate with du --block-size=1K.")
 parser.add_argument('--output', action="store", type=str, default=None, dest="output", help="Filename prefix for output files (optional)")
 parser.add_argument('--plot_title', action="store", type=str, default=None, dest="plot_title", help="Title for output plot (optional)")
-
+parser.add_argument('--z_score_cutoff', action="store", type=float, default=2, help="Z score cutoff for plots and reporting outliers (optional; default is 2)")
 # parse arguments
 results = parser.parse_args()
 # debugging output
 # print(results.pod5_path)
 # print(results.ubam_path)
 # print(results.input_table)
+# print(results.z_score_cutoff)
 
 # throw error if no input provided
 if ((results.pod5_path is None) and (results.ubam_path is None) and (results.input_table is None)):
@@ -109,15 +110,15 @@ ax.set(xlabel="POD5 size (kb)",ylabel="UBAM standardized residual (z-score)")
 if results.plot_title is not None:
     ax.set(title=results.plot_title)
 # add horizontal cutoffs for z scores of -2 (red), 0 (gray), and 2 (red)
-ax.axhline(y=-2,color="red")
+ax.axhline(y=-1*results.z_score_cutoff,color="red")
 ax.axhline(y=0,color="gray")
-ax.axhline(y=2,color="red")
+ax.axhline(y=results.z_score_cutoff,color="red")
 fig.savefig(results.output + "_stdresidualplot.png", format='png', dpi=150, bbox_inches='tight')
 # close figure
 fig.clf()
 # print table with outliers based on residuals
 # filter for std residual with absolute value above 2
-pod5_ubam_sizes_df_outliers = pod5_ubam_sizes_df[abs(pod5_ubam_sizes_df['Standardized Residual']) > 2]
+pod5_ubam_sizes_df_outliers = pod5_ubam_sizes_df[abs(pod5_ubam_sizes_df['Standardized Residual']) > results.z_score_cutoff]
 # save as TSV file
 pod5_ubam_sizes_df_outliers.to_csv(results.output + "_outliers.tsv",sep='\t',index=False)
 # script complete
