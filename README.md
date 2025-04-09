@@ -88,7 +88,7 @@ The red lines mark z-scores of 2 above and below the expected value, while the g
 
 ## Mapping to a human genome reference
 We map all reads to the human genome reference GRCh38 using minimap2 before checking for sample swaps and calling variants.
-To perform basic QC after mapping, we use the tool cramino from the package nanopack (https://github.com/wdecoster/nanopack), which is available as a module on Biowulf.
+To perform basic QC after mapping, we use the tool cramino from the package nanopack (https://github.com/wdecoster/nanopack), which is available as a module on Biowulf. We have also developed a dashboard to aggregate cramino statistics over a group of alignments that we use for overall cohort QC (https://github.com/molleraj/CARDlongread-cramino-dashboard).
 ## Checking for sample swaps (case specific)
 Depending upon cohort, we check for sample swaps at both the initial flow cell and merged sample levels through whole genome alignment and variant calling. The sample swap calling procedure depends upon first subsetting samples' mapped reads per chromosome, calling single nucleotide variants from these subsets in relatively fast manner with Clair3, concatenating variant calls per sample, merging sample variant calls with corresponding short read variant calls, and then creating a king table with Plink2.
 # Variant calling
