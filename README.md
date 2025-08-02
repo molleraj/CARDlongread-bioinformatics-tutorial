@@ -103,6 +103,8 @@ We call structural variants from long read alignments using Sniffles (https://gi
 Variant call merging depends upon variant type.
 ## Annotating variant calls
 Like merging, we annotate variant calls with different tools depending upon variant type.
+# Modification calling (e.g., methylation)
+In addition to variant calling, we also call DNA modifications (primarily methylation) from unmapped bams using the ```modkit``` modification calling toolkit. We call methylation modifications using the ```modkit pileup``` subcommand.
 ## Compute resource use summary
 The estimates below are based on one 30x coverage sample (except for SNV calling - 1 sample alignment subsetted for a particular choromosome) and are generous especially concerning time (i.e., more resources provided than necessary).
 | Data processing step | Dependencies | Memory | CPUs | GPUs | Local scratch | Time allocation | 
