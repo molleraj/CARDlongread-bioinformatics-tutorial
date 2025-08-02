@@ -114,3 +114,4 @@ The estimates below are based on one 30x coverage sample (except for SNV calling
 | SNV calling | DeepVariant 1.8.0, singularity 4.1.5 | 64GB | 16 | n/a | 50GB | 1 day |
 | STR calling | Vamos 2.1.5, singularity 4.1.5 | 32GB | 16 | n/a | n/a | 6 hours | 
 | SV calling | Sniffles 2.5.3 | 16GB | 16 | n/a | n/a | 1 hour |
+| Methylation calling | Modkit | | | | |
