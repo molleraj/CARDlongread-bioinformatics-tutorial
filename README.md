@@ -102,7 +102,7 @@ We call structural variants from long read alignments using Sniffles (https://gi
 ## Merging variant calls
 Variant call merging depends upon variant type.
 ## Annotating variant calls
-Like merging, we annotate variant calls with different tools depending upon variant type.
+Like merging, we annotate variant calls with different tools depending upon variant type. For example, we use AnnotSV for annotating structural variants and AnnoVar for annotating small nucleotide variants.
 # Modification calling (e.g., methylation)
 In addition to variant calling, we also call DNA modifications (primarily methylation) from unmapped bams using the ```modkit``` modification calling toolkit. We call methylation modifications using the ```modkit pileup``` subcommand. We call 5mC modifications in CpG sites typically using the hg38 reference using ```modkit pileup``` commands like the following included in the template script:
 ```
