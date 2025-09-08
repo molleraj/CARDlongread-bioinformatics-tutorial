@@ -104,7 +104,8 @@ Variant call merging depends upon variant type.
 ## Annotating variant calls
 Like merging, we annotate variant calls with different tools depending upon variant type.
 # Modification calling (e.g., methylation)
-In addition to variant calling, we also call DNA modifications (primarily methylation) from unmapped bams using the ```modkit``` modification calling toolkit. We call methylation modifications using the ```modkit pileup``` subcommand.
+In addition to variant calling, we also call DNA modifications (primarily methylation) from unmapped bams using the ```modkit``` modification calling toolkit. We call methylation modifications using the ```modkit pileup``` subcommand. We call 5mC modifications in CpG sites typically using the hg38 reference using ```modkit pileup``` commands like the following included in the template script:
+```modkit pileup --cpg --ref /data/CARDPB/resources/hg38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fa --only-tabs --threads 24 --ignore h --combine-strands --partition-tag HP --prefix ${SAMPLE_ID}_${FLOWCELL} ${BAM_FILE} ${OUT}```
 ## Compute resource use summary
 The estimates below are based on one 30x coverage sample (except for SNV calling - 1 sample alignment subsetted for a particular choromosome) and are generous especially concerning time (i.e., more resources provided than necessary).
 | Data processing step | Dependencies | Memory | CPUs | GPUs | Local scratch | Time allocation | 
@@ -114,4 +115,4 @@ The estimates below are based on one 30x coverage sample (except for SNV calling
 | SNV calling | DeepVariant 1.8.0, singularity 4.1.5 | 64GB | 16 | n/a | 50GB | 1 day |
 | STR calling | Vamos 2.1.5, singularity 4.1.5 | 32GB | 16 | n/a | n/a | 6 hours | 
 | SV calling | Sniffles 2.5.3 | 16GB | 16 | n/a | n/a | 1 hour |
-| Methylation calling | Modkit | | | | |
+| Methylation calling | Modkit | 80GB | 24 | n/a | n/a | 8 hours |
