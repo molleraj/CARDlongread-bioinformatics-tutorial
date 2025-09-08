@@ -4,7 +4,7 @@ Summarizing the foundational data management, processing, and analysis steps we 
 ## Data transfer from the PromethIONs
 We move raw ONT runs from the PromethIONs to Biowulf using Globus. We have Globus endpoints set up on each PromethION using Globus Connect Personal (https://www.globus.org/globus-connect-personal). After confirming data transfer has completed successfully (both through Globus and a manual command line check on Biowulf and the PromethIONs using ```du -sch```), we delete the local data copy from the PromethIONs.
 ## Data backup to Google Cloud storage
-While basecalling raw POD5 ONT data on Biowulf (see later in the tutorial), we also archive this data to the coldest-storage archival bucket on Google Cloud Platform. We transfer this data to Google Cloud through the Google Cloud Platform endpoint NIH HPC provides on Globus.
+While basecalling raw POD5 ONT data on Biowulf (see later in the tutorial), we also archive this data to the coldest-storage archival bucket on Google Cloud Platform. We transfer this data to Google Cloud through the Google Cloud Platform endpoint NIH HPC provides on Globus. As for PromethION data transfers, we delete local copies of POD5s from Biowulf after confirming successful transfer both through Globus and ```gsutil -m du -sh``` on the NIH Helix dedicated data transfer cluster.
 ## Raw data sequencing QC
 We use a set of two Python scripts to collect critical quality control parameters for weekly and cohort-wide sequencing runs, such as read N50, per flow cell output, experiment output, and flow cell starting active pores. More details can be found here: https://github.com/molleraj/CARDlongread-report-parser
 
