@@ -2,7 +2,7 @@
 Summarizing the foundational data management, processing, and analysis steps we do in the NIA CARD LRS group.
 # Data management
 ## Data transfer from the PromethIONs
-We move raw ONT runs from the PromethIONs to Biowulf using Globus. We have Globus endpoints set up on each PromethION using Globus Connect Personal (https://www.globus.org/globus-connect-personal).
+We move raw ONT runs from the PromethIONs to Biowulf using Globus. We have Globus endpoints set up on each PromethION using Globus Connect Personal (https://www.globus.org/globus-connect-personal). After confirming data transfer has completed successfully (both through Globus and a manual command line check on Biowulf and the PromethIONs using ```du -sch```), we delete the local data copy from the PromethIONs.
 ## Data backup to Google Cloud storage
 While basecalling raw POD5 ONT data on Biowulf (see later in the tutorial), we also archive this data to the coldest-storage archival bucket on Google Cloud Platform. We transfer this data to Google Cloud through the Google Cloud Platform endpoint NIH HPC provides on Globus.
 ## Raw data sequencing QC
