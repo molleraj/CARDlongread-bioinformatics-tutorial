@@ -85,7 +85,8 @@ Here are example scatterplots with the regression and standardized residuals:
 <img src="https://github.com/user-attachments/assets/a9e40ccc-c8af-4796-a100-61bebffac95b" width=720></img>
 <br></br>
 The red lines mark z-scores of 2 above and below the expected value, while the gray line marks a z-score of 0 (expected value based on the regression line).
-
+## Basecall quality filtering
+When applicable, we filter basecalled reads to remove reads with an average basecalling quality score of Q10 or lower. This process involves converting unmapped BAMs to FASTQ files with ```samtools fastq``` while carrying methylation modification tags into the FASTQ headers, filtering reads in FASTQ format for average basecalling quality score with the ```chopper``` tool available as part of the nanopack package (), and then converting fastq files back into BAMs using. We have run basecall quality filtering and then mapping of the basecall quality filtered, unmapped BAMs in a single step in the past. Template scripts for both basecall quality filtering and filtering plus mapping are provided accordingly.
 ## Mapping to a human genome reference
 We map all reads to the human genome reference GRCh38 using minimap2 before checking for sample swaps and calling variants.
 To perform basic QC after mapping, we use the tool cramino from the package nanopack (https://github.com/wdecoster/nanopack), which is available as a module on Biowulf. We have also developed a dashboard to aggregate cramino statistics over a group of alignments that we use for overall cohort QC (https://github.com/molleraj/CARDlongread-cramino-dashboard).
