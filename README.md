@@ -117,10 +117,11 @@ The estimates below are based on one 30x coverage sample (except for SNV calling
 | Data processing step | Dependencies | Memory | CPUs | GPUs | Local scratch | Time allocation | 
 | -------------------- | ------------ | ------ | ---- | ---- | ------------- | --------------- |
 | Basecalling | Dorado 0.9.0, pod5 0.3.6 | 120GB | 30 | 2 A100 | 50GB | 2 days |
+| Basecall quality filtering | samtools, chopper | | | | | |
 | Mapping | Minimap2 2.28, samtools 1.21 | 120GB | 40 | n/a | n/a | 1 day |
 | SNV calling | DeepVariant 1.8.0, singularity 4.1.5 | 64GB | 16 | n/a | 50GB | 1 day |
 | STR calling | Vamos 2.1.5, singularity 4.1.5 | 32GB | 16 | n/a | n/a | 6 hours | 
 | SV calling | Sniffles 2.5.3 | 16GB | 16 | n/a | n/a | 1 hour |
 | Methylation calling | Modkit 0.5.0 | 80GB | 24 | n/a | n/a | 8 hours |
-| SNV annotation | | | | | |
-| SV annotation | | | | | |
+| SNV annotation | AnnoVar | | | | |
+| SV annotation | AnnotSV | | | | |
