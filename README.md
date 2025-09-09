@@ -21,6 +21,7 @@ python3 CARDlongread_extract_from_json.py --json_dir /data/CARDPB/data/PPMI/SEQ_
 python3 CARDlongread_extract_summary_statistics.py -input example_output.tsv -output example_summary_spreadsheet.xlsx -platform_qc example_platform_qc.csv -plot_title "PPMI tutorial example"
 ```
 # Data processing
+## Flowchart overview
 ## Sample sheet
 The next downstream three steps depend upon a samplesheet file with a list of sample names and flow cells. This is a headerless (no column names) TSV file with sample names in the first column and flow cells in the second. This can be prepared from the sequencing QC TSV output shown above like so:
 ```
@@ -91,7 +92,7 @@ When applicable, we filter basecalled reads to remove reads with an average base
 We map all reads to the human genome reference GRCh38 using minimap2 before checking for sample swaps and calling variants.
 To perform basic QC after mapping, we use the tool cramino from the package nanopack (https://github.com/wdecoster/nanopack), which is available as a module on Biowulf. We have also developed a dashboard to aggregate cramino statistics over a group of alignments that we use for overall cohort QC (https://github.com/molleraj/CARDlongread-cramino-dashboard).
 ## Checking for sample swaps (case specific)
-Depending upon cohort, we check for sample swaps at both the initial flow cell and merged sample levels through whole genome alignment and variant calling. The sample swap calling procedure depends upon first subsetting samples' mapped reads per chromosome, calling single nucleotide variants from these subsets in relatively fast manner with Clair3, concatenating variant calls per sample, merging sample variant calls with corresponding short read variant calls, and then creating a king table with Plink2.
+Depending upon cohort, we check for sample swaps at both the initial flow cell and merged sample levels through whole genome alignment and variant calling. The sample swap calling procedure depends upon first subsetting samples' mapped reads per chromosome, calling single nucleotide variants from these subsets in relatively fast manner with Clair3, concatenating variant calls per sample, merging sample variant calls with corresponding short read variant calls, and then creating a kinship coefficient (KING) table with Plink2. We later expedited the variant merging and KING table generation processes by linkage disequilibrium (LD) pruning the merged short read joint variant call dataset and subsetting long read variant calls for those overlapping LD pruned short read joint calls. We have used a kinship coefficient of 0.375 (arithmetic mean between 0.25 and 0.5, corresponding to first degree siblings and identical individuals, respectively) as a cutoff for identifying identical pairs of samples either comparing long read against other long read variant calls or long read against short read variant calls.
 ## Alignment phasing
 We primarily phase mapped BAM alignments using PEPPER-Margin-DeepVariant (PMDV). A sample phasing script using PMDV is included.
 # Variant calling
