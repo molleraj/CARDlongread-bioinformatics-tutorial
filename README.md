@@ -104,7 +104,7 @@ We call short tandem repeats from long read alignments using Vamos (https://gith
 ## Structural variants (SVs)
 We call structural variants from long read alignments using Sniffles (https://github.com/fritzsedlazeck/Sniffles). We first call variants in individual samples as Sniffles (SNF) output and then merge SNF files into a single VCF, also using Sniffles.
 ## Merging variant calls
-Variant call merging depends upon variant type.
+Variant call merging depends upon variant type. Single nucleotide variants (SNVs) are typically merged using ```bcftools merge```, while Vamos (STRs) and Sniffles (SNVs) provide their own tools for merging respective variants.
 ## Annotating variant calls
 Like merging, we annotate variant calls with different tools depending upon variant type. For example, we use AnnotSV for annotating structural variants and AnnoVar for annotating small nucleotide variants.
 # Modification calling (e.g., methylation)
