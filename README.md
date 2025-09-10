@@ -94,17 +94,17 @@ To perform basic QC after mapping, we use the tool cramino from the package nano
 ## Checking for sample swaps (case specific)
 Depending upon cohort, we check for sample swaps at both the initial flow cell and merged sample levels through whole genome alignment and variant calling. The sample swap calling procedure depends upon first subsetting samples' mapped reads per chromosome, calling single nucleotide variants from these subsets in relatively fast manner with Clair3, concatenating variant calls per sample, merging sample variant calls with corresponding short read variant calls, and then creating a kinship coefficient (KING) table with Plink2. We later expedited the variant merging and KING table generation processes by linkage disequilibrium (LD) pruning the merged short read joint variant call dataset and subsetting long read variant calls for those overlapping LD pruned short read joint calls. We have used a kinship coefficient of 0.375 (arithmetic mean between 0.25 and 0.5, corresponding to first degree siblings and identical individuals, respectively) as a cutoff for identifying identical pairs of samples either comparing long read against other long read variant calls or long read against short read variant calls.
 ## Alignment phasing
-Phasing is the process of assigning . We primarily phase mapped BAM alignments using PEPPER-Margin-DeepVariant (PMDV) 0.8. A sample phasing script using PMDV is included.
+Phasing is the process of assigning aligned reads, variant calls, and methylation calls to each haplotype (maternal and paternal) based on variants called from read alignments and/or assemblies. We primarily phase mapped BAM alignments using PEPPER-Margin-DeepVariant (PMDV) 0.8. A sample phasing script using PMDV is included.
 # Variant calling
 We then use the long read genome alignment mappings to call a number of different variants, including single nucleotide variants (SNVs), short tandem repeats (STRs), and structural variants (SVs), using methods further described below.
 ## Single nucleotide variants (SNVs)
 We call single nucleotide variants from long read alignments with several different tools, including Clair3 (https://github.com/HKU-BAL/Clair3), DeepVariant (https://github.com/google/deepvariant), and PEPPER-Margin-DeepVariant (PMDV) (https://github.com/kishwarshafin/pepper). We have found through testing that either flow cell or merged sample (multiple flow cells combined) level alignment data should be subsetted by each chromosome in order to increase job throughput on the NIH HPC cluster and maintain reasonable resource (especially RAM) use on the nodes of the norm partition. Template scripts for running each SNV caller (Clair3, DeepVariant, and PMDV) are included, as well as a template script for subsetting a mapped BAM alignment by chromosome to parallelize SNV calling and thus better utilize Biowulf shared resources.
 ## Short tandem repeats (STRs)
-We call short tandem repeats from long read alignments using Vamos (https://github.com/ChaissonLab/vamos). Vamos identifies STRs from motifs annotated in partial order alignment of reads . This is provided in a singularity container by the Chaisson lab.
+We call short tandem repeats from long read alignments using Vamos (https://github.com/ChaissonLab/vamos). Vamos identifies STRs from motifs annotated in a consensus generated from partial order alignment of reads per haplotype. Motifs for annotation are selected from accuracy-optimized STR annotations identified in long read assemblies. Vamos as used in the repository script is provided in a singularity container by the Chaisson lab.
 ## Structural variants (SVs)
 We call structural variants from long read alignments using Sniffles (https://github.com/fritzsedlazeck/Sniffles). We first call variants in individual samples as Sniffles (SNF) output and then merge SNF files into a single VCF, also using Sniffles. We split merged VCFs by individuals using the ```bcftools +split``` plugin to generate per individual SV VCF files that list all SVs collectively found in the cohort analyzed.
 ## Merging variant calls
-Variant call merging depends upon variant type. Single nucleotide variants (SNVs) are typically merged using ```bcftools merge```, while Vamos (STRs) and Sniffles (SNVs) provide their own tools for merging respective variants.
+Variant call merging depends upon variant type. Single nucleotide variants (SNVs) are typically merged using ```bcftools merge```, while Vamos (STRs) and Sniffles (SVs) provide their own tools for merging respective variants. We merge Vamos STR calls using the tryvamos (https://github.com/ChaissonLab/vamos/tree/master/tryvamos) companion package function combineVCF. We merge Sniffles SV calls as SNF files with the ```sniffles``` command taking a list of SNF calls as input.
 ## Annotating variant calls
 Like merging, we annotate variant calls with different tools depending upon variant type. For example, we use AnnotSV for annotating structural variants and AnnoVar for annotating small nucleotide variants. We have included sample AnnotSV and AnnoVar scripts in the repository.
 # Modification calling (e.g., methylation)
@@ -119,7 +119,7 @@ The estimates below are based on one 30x coverage sample (except for SNV calling
 | Basecalling | Dorado 0.9.0, pod5 0.3.6 | 120GB | 30 | 2 A100 | 50GB | 2 days |
 | Basecall quality filtering | samtools, chopper | | | | | |
 | Mapping | Minimap2 2.28, samtools 1.21 | 120GB | 40 | n/a | n/a | 1 day |
-| Phasing | PEPPER-Margin-DeepVariant (PMDV) 0.9 | | | | | |
+| Phasing | PEPPER-Margin-DeepVariant (PMDV) 0.8 | | | | | |
 | SNV calling | DeepVariant 1.8.0, singularity 4.1.5 | 64GB | 16 | n/a | 50GB | 1 day |
 | STR calling | Vamos 2.1.5, singularity 4.1.5 | 32GB | 16 | n/a | n/a | 6 hours | 
 | SV calling | Sniffles 2.5.3 | 16GB | 16 | n/a | n/a | 1 hour |
