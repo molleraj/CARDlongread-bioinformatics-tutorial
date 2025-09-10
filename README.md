@@ -108,7 +108,7 @@ Variant call merging depends upon variant type. Single nucleotide variants (SNVs
 ## Annotating variant calls
 Like merging, we annotate variant calls with different tools depending upon variant type. For example, we use AnnotSV for annotating structural variants and AnnoVar for annotating small nucleotide variants. We have included sample AnnotSV and AnnoVar scripts in the repository.
 # Modification calling (e.g., methylation)
-In addition to variant calling, we also call DNA modifications (primarily methylation) from unmapped BAMs and/or phased BAMs using the ```modkit``` modification calling toolkit. We call methylation modifications using the ```modkit pileup``` subcommand. We call 5mC modifications in CpG sites typically using the hg38 reference using ```modkit pileup``` commands like the following included in the template script:
+In addition to variant calling, we also call DNA modifications (primarily methylation) from unmapped BAMs and/or phased, mapped BAMs using the ```modkit``` modification calling toolkit. We call methylation modifications using the ```modkit pileup``` subcommand. We call 5mC modifications in CpG sites typically using the hg38 reference using ```modkit pileup``` commands like the following included in the template script:
 ```
 modkit pileup --cpg --ref /data/CARDPB/resources/hg38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fa --only-tabs --threads 24 --ignore h --combine-strands --partition-tag HP --prefix ${SAMPLE_ID}_${FLOWCELL} ${BAM_FILE} ${OUT}
 ```
