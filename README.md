@@ -118,7 +118,7 @@ The estimates below are based on one 30x coverage sample (except for SNV calling
 | Data processing step | Dependencies | Memory | CPUs | GPUs | Local scratch | Time allocation | Input type |
 | -------------------- | ------------ | ------ | ---- | ---- | ------------- | --------------- | ---------- |
 | Basecalling | Dorado 0.9.0, pod5 0.3.6 | 120GB | 30 | 2 A100 | 50GB | 2 days | Whole genome (30x coverage) |
-| Basecall quality filtering | samtools 1.21, chopper 0.7.0 (nanopack 20231214) | | | | | 8 hours | Whole genome (30x coverage) |
+| Basecall quality filtering | samtools 1.21, chopper 0.7.0 (nanopack 20231214) | 120GB | 40 | n/a | n/a | 8 hours | Whole genome (30x coverage) |
 | Mapping | Minimap2 2.28, samtools 1.21 | 120GB | 40 | n/a | n/a | 1 day | Whole genome (30x coverage) |
 | Phasing | PEPPER-Margin-DeepVariant (PMDV) 0.8, samtools 1.21 | 80GB | 12 | 1 V100X | 100GB | 1 day | Whole genome (30x coverage) |
 | SNV calling | DeepVariant 1.8.0, singularity 4.1.5 | 64GB | 16 | n/a | 50GB | 1 day | One chromosome subset of WGS |
