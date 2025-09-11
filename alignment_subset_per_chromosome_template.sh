@@ -8,9 +8,8 @@
 #SBATCH --mail-type=BEGIN,TIME_LIMIT_90,END
 
 #NEED TO CHANGE HERE
-BASE_DIR=/data/CARDPB/data/E46K
-#DEST_DIR=/data/CARD_AUX/LRS_temp/RUSH
-SAMPLE_SHEET='/data/CARDPB/data/E46K/SCRIPTS/E46K_SAMPLE_FLOWCELL.tsv'
+BASE_DIR=/data/CARDPB/data/cohort
+SAMPLE_SHEET='/path/to/samplesheet'
 
 # add merged BAM directory
 # mkdir -p ${BASE_DIR}/ONT_UBAM_CARDPB/
@@ -33,10 +32,10 @@ module load samtools
 CHROMOSOMES=("chr1" "chr2" "chr3" "chr4" "chr5" "chr6" "chr7" "chr8" "chr9" "chr10" "chr11" "chr12" "chr13" "chr14" "chr15" "chr16" "chr17" "chr18" "chr19" "chr20" "chr21" "chr22" "chrX" "chrY" "chrM")
 
 # specify mapped BAM input
-BAM_IN=${BASE_DIR}/MAPPED_BAM/${SAMPLE_ID}/${SAMPLE_ID}_${FLOWCELL}.second_attempt.sorted_meth.bam
+BAM_IN=${BASE_DIR}/MAPPED_BAM/${SAMPLE_ID}/${SAMPLE_ID}_${FLOWCELL}.sorted_meth.bam
 for i in "${CHROMOSOMES[@]}"
 do
-BAM_SUBSET=${SAMPLE_ID}_${FLOWCELL}.${i}.second_attempt.sorted_meth.bam
+BAM_SUBSET=${SAMPLE_ID}_${FLOWCELL}.${i}.sorted_meth.bam
 # specify output directory as SAMPLE ID parent and FLOWCELL descendant
 OUTPUT=${BASE_DIR}/MAPPED_BAM/${SAMPLE_ID}_per_chromosome
 # DIR_NAME=$(dirname ${BAM_IN})

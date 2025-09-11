@@ -8,8 +8,10 @@
 
 # get array job number for spooling subjobs
 N=${SLURM_ARRAY_TASK_ID}
+# set base directory
+BASE_DIR=/data/CARDPB/data/cohort
 # tab delimited file with list of samples and flow cells in columns 1 and 2
-SAMPLE_SHEET='/data/CARDPB/data/E46K/SCRIPTS/E46K_SAMPLE_FLOWCELL_UNIQUE_PAIRS.tsv'
+SAMPLE_SHEET='/path/to/samplesheet'
 SAMPLE_ID=$(sed -n ${N}p $SAMPLE_SHEET| cut -f 1)
 FLOWCELL=$(sed -n ${N}p $SAMPLE_SHEET | cut -f 2)
 
@@ -20,7 +22,6 @@ echo "FLOWCELL ${FLOWCELL}"
 
 # load annovar for SNV annotation
 ml annovar
-BASE_DIR=/data/CARDPB/data/E46K
 
 # set VCF variable for running AnnoVar based on per sample concatenated DV VCF
 
