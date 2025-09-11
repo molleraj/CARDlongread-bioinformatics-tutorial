@@ -8,16 +8,16 @@
 # load modkit module
 ml modkit
 
-# METHYLATION='/data/CARD_AUX/LRS_temp/CHILE/METHYLATION'
 #NEED TO CHANGE HERE
-BASE_DIR=/data/CARDPB/data/E46K
-#DEST_DIR=/data/CARD_AUX/LRS_temp/UAB
-SAMPLE_SHEET='/data/CARDPB/data/E46K/SCRIPTS/E46K_SAMPLE_FLOWCELL.tsv'
+BASE_DIR=/data/CARDPB/data/cohort
+SAMPLE_SHEET='/path/to/samplesheet'
 
 # add methylation BED directory
 # mkdir -p ${BASE_DIR}/METHYLATION/
 
 N=${SLURM_ARRAY_TASK_ID}
+
+# get sample name and flow cell ID variables from sample sheet
 
 SAMPLE_ID=$(sed -n ${N}p $SAMPLE_SHEET | cut -f 1)
 FLOWCELL=$(sed -n ${N}p $SAMPLE_SHEET | cut -f 2)
