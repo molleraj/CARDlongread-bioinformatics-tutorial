@@ -56,7 +56,6 @@ run_deepvariant \
 --output_gvcf=${OUT_FOLDER}/${SAMPLE_PREFIX}.g.vcf.gz \
 --intermediate_results_dir=${OUT_FOLDER}/intermediate_results_dir \
 --logging_dir=${OUT_FOLDER}/logs \
---model_type WGS \
 --call_variants_extra_args="writer_threads=1" \
 --num_shards=16
 
