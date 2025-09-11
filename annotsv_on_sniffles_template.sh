@@ -29,7 +29,7 @@ ml annotsv bedtools bcftools
 
 # split merged VCF by sample
 # ml samtools
-# bcftools +split ${BASE_DIR}/Sniffles/vcf/${OUTPUT_VCF} -o ${BASE_DIR}/Sniffles/vcf/E46K_het_sample_split
+# bcftools +split ${BASE_DIR}/Sniffles/vcf/${OUTPUT_VCF} -o ${BASE_DIR}/Sniffles/vcf/cohort_het_sample_split
 VCF=${BASE_DIR}/Sniffles/vcf/cohort_het_sample_split/${SAMPLE_ID}.vcf.gz
 # run AnnotSV and output to E46K_het_sample_split directory
-AnnotSV -SVinputFile ${VCF} -SVinputInfo 1 -outputFile ${BASE_DIR}/Sniffles/vcf/E46K_het_sample_split/${SAMPLE_ID}.annotsv.tsv
+AnnotSV -SVinputFile ${VCF} -SVinputInfo 1 -outputFile ${BASE_DIR}/Sniffles/vcf/cohort_het_sample_split/${SAMPLE_ID}.annotsv.tsv
