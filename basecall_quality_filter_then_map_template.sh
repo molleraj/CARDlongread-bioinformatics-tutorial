@@ -36,4 +36,4 @@ samtools index ${BASE_DIR}/MAPPED_BAM_BQ_FILTERED/${SAMPLE_ID}.sorted_minimap2_b
 # run cramino
 BAM=${SAMPLE_ID}.sorted_minimap2_bq10_filtered.bam
 
-cramino -t 32 --reference /data/CARDPB/resources/hg38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fa ${BAM} > ${BAM}_cramino_QC.txt
+cramino -t 32 --reference /data/CARDPB/resources/hg38/GCA_000001405.15_GRCh38_no_alt_analysis_set.fa ${BASE_DIR}/MAPPED_BAM_BQ_FILTERED/${BAM} > ${BASE_DIR}/MAPPED_BAM_BQ_FILTERED/${BAM}_cramino_QC.txt
