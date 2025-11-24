@@ -72,7 +72,7 @@ cut -f3 ${input}_matches_corrected_names_to_dbSNP.tsv > ${input}_matches_correct
 # remember to convert GSA names back if necessary
 # make sure to update id names, remove duplicates, and sort variants
 # need to output in pfile (pgen + pvar) format to sort variants
-plink2 --threads ${threads} --bfile batch1 --update-name ${input}_prefix_correction_table.tsv --rm-dup force-first --sort-vars --make-pgen --out ${input}_updated_names_unique_sorted_vars
+plink2 --threads ${threads} --bfile ${input} --update-name ${input}_prefix_correction_table.tsv --rm-dup force-first --sort-vars --make-pgen --out ${input}_updated_names_unique_sorted_vars
 
 # above two methods failed so try relabeling with plink - update chromosome and position first
 plink2 --threads ${threads} --pfile ${input}_updated_names_unique_sorted_vars --extract ${input}_matches_corrected_names_to_dbSNP_rsIDs.tsv \
