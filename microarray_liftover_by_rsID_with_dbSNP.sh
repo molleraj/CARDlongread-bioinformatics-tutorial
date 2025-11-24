@@ -32,7 +32,7 @@ do
 done
 
 # Print helpFunction in case required parameters are empty
-if [ -z "$dbsnp_variants" ] || [ -z "$reference_fasta"] || [ -z "$input" ] || [ -z "$output" ]
+if [ -z "$dbsnp_variants" ] || [ -z "$reference_fasta" ] || [ -z "$input" ] || [ -z "$output" ]
 then
    echo "Some or all of the required parameters are empty.";
    helpFunction
@@ -72,17 +72,17 @@ cut -f3 ${input}_matches_corrected_names_to_dbSNP.tsv > ${input}_matches_correct
 # remember to convert GSA names back if necessary
 # make sure to update id names, remove duplicates, and sort variants
 # need to output in pfile (pgen + pvar) format to sort variants
-plink2 --threads $--bfile batch1 --update-name ${input}_prefix_correction_table.tsv --rm-dup force-first --sort-vars --make-pgen --out ${input}_updated_names_unique_sorted_vars
+plink2 --threads ${threads} --bfile batch1 --update-name ${input}_prefix_correction_table.tsv --rm-dup force-first --sort-vars --make-pgen --out ${input}_updated_names_unique_sorted_vars
 
 # above two methods failed so try relabeling with plink - update chromosome and position first
-plink2 --pfile ${input}_updated_names_unique_sorted_vars --extract ${input}_matches_corrected_names_to_dbSNP_rsIDs.tsv \
+plink2 --threads ${threads} --pfile ${input}_updated_names_unique_sorted_vars --extract ${input}_matches_corrected_names_to_dbSNP_rsIDs.tsv \
 --update-chr ${input}_matches_corrected_names_to_dbSNP.tsv 1 3 \
 --update-map ${input}_matches_corrected_names_to_dbSNP.tsv 2 3 --sort-vars --make-pgen \
 --out ${input}_updated_names_matching_ids_dbSNP_liftover_coords_corrected
 
 # second step with fa correction and removing bad snp bases
 # make sure chr1...chrM naming scheme to match hg38 DV/clair3 calls (not 1..M)
-plink2 --pfile ${input}_updated_names_matching_ids_dbSNP_liftover_coords_corrected \
+plink2 --threads ${threads} --pfile ${input}_updated_names_matching_ids_dbSNP_liftover_coords_corrected \
 --ref-from-fa ${reference_fasta} \
 --snps-only just-acgt --export vcf bgz --output-chr chrM \
 --out ${input}_updated_names_matching_ids_dbSNP_liftover
@@ -95,3 +95,7 @@ bcftools +fixref ${input}_updated_names_matching_ids_dbSNP_liftover.vcf.gz -O z 
 -- -f ${reference_fasta} -m flip -d
 # index output
 bcftools index ${input}_updated_names_matching_ids_dbSNP_liftover_reffixed.vcf.gz
+
+# copy outputs
+cp ${input}_updated_names_matching_ids_dbSNP_liftover_reffixed.vcf.gz ${output}.vcf.gz
+cp ${input}_updated_names_matching_ids_dbSNP_liftover_reffixed.vcf.gz.csi ${output}.vcf.gz.csi
