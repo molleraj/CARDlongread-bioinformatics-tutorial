@@ -1,5 +1,5 @@
 # NIA CARD long read sequencing group bioinformatics tutorial
-Summarizing the foundational data management, processing, and analysis steps we do in the NIA CARD LRS group.
+Summarizing the foundational data management, processing, and analysis steps we do in the NIA CARD Applied Neurogenomics (ANG)/Long-Read Sequencing (LRS) group.
 # Data management
 ## Data transfer from the PromethIONs
 We move raw ONT runs from the PromethIONs to Biowulf using Globus. We have Globus endpoints set up on each PromethION using Globus Connect Personal (https://www.globus.org/globus-connect-personal). After confirming data transfer has completed successfully (both through Globus and a manual command line check on Biowulf and the PromethIONs using ```du -sch```), we delete the local data copy from the PromethIONs.
