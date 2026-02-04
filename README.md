@@ -96,7 +96,8 @@ The first step in preparing POD5s for channel subsetting is generating a table w
 
 This step is included in the script ```pod5_subset_by_channel_template.sh``` as the following:
 ```# get summary file
-pod5 view ${BASE_DIR}/POD5/${SAMPLE_ID}/${FLOWCELL}/ --include "read_id, channel" --output ${BASE_DIR}/POD5/${SAMPLE_ID}/${FLOWCELL}/read_id_channel_summary.tsv --force-overwrite```
+pod5 view ${BASE_DIR}/POD5/${SAMPLE_ID}/${FLOWCELL}/ --include "read_id, channel" --output ${BASE_DIR}/POD5/${SAMPLE_ID}/${FLOWCELL}/read_id_channel_summary.tsv --force-overwrite
+```
 
 Scripts for POD5 channel subsetting, running basecalling on POD5 channel groups (chunks), and merging output unmapped BAMs are provided as ```pod5_subset_by_channel_template.sh```, ```basecall_channel_groups_template.sh```, and ```merge_basecalled_channel_groups_template.sh```, respectively. We also provided a POD5 subsetting script that deletes the original files if subsetting completes properly (```pod5_subset_by_channel_template_and_clear_original.sh```). This is a good option if the original POD5s have already been backed up to Google Cloud as we describe earlier in the tutorial or elsewhere.
 
