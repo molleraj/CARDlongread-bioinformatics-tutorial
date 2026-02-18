@@ -28,6 +28,9 @@ echo "FLOWCELL ${FLOWCELL}"
 # make output directory and parent if necessary
 mkdir -p ${BASE_DIR}/ONT_UBAM/${SAMPLE_ID}
 
+# load samtools module
+module load samtools
+
 # merge channel groups into single BAM
 samtools merge -@ 60 -o ${BASE_DIR}/ONT_UBAM/${SAMPLE_ID}/${SAMPLE_ID}_${FLOWCELL}_merged_pod5.5mCG_5hmCG_v4.1.0.bam ${BASE_DIR}/ONT_UBAM/${SAMPLE_ID}/${SAMPLE_ID}_${FLOWCELL}_channel_subset_pod5_group*_pod5.5mC_5hmC_v4.1.0.bam
 # index BAM for downstream steps
