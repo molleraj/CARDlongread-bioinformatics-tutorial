@@ -46,6 +46,9 @@ mkdir -p ${OUT_FOLDER}
 # singularity run --nv -B /usr/lib/locale/:/usr/lib/locale/ \
 # /data/mollerabg/deepvariant/deepvariant_1.8.0-gpu.sif \
 
+# increase user limits in case you want to increase the number of shards/parallelization of the program
+ulimit -n 32768 -u 32768
+
 # removed docker image described above. now use built-in biowulf module
 run_deepvariant \
 --model_type=ONT_R104 \
