@@ -18,6 +18,11 @@ BAM=${BASE_DIR}/MAPPED_BAM/${SAMPLE_ID}.sorted_meth.bam
 OUTPUT_VCF=${BASE_DIR}/VAMOS/${SAMPLE_ID}_vamos.vcf
 SAMPLENAME=${SAMPLE_ID}
 
+# increase user limits for open processes and files if necessary to increase thread count above four
+# Biowulf HPC defaults are 4096 open processes and files
+
+ulimit -n 32768 -u 32768
+
 # Run with docker
 
 VAMOS=/data/CARDPB/data/adaptive_sampling/Madison_repeat/VAMOS/vamos_2.1.3.sif
