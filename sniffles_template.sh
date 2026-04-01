@@ -38,4 +38,4 @@ sniffles --input SNIFFLES_samples.tsv --vcf ${OUTPUT_VCF}
 
 # split merged VCF by sample
 ml samtools
-bcftools +split cohort_sniffles_het.vcf -o cohort_het_sample_split
+bcftools +split ${OUTPUT_VCF} -o cohort_het_sample_split
