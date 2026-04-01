@@ -31,11 +31,12 @@ echo $BAM
 sniffles --allow-overwrite -t 16 --input $BAM --snf ${BASE_DIR}/Sniffles/snf/${SAMPLE_ID}.snf
 
 # combine VCFs
+COHORT_NAME=cohort
 ls ${BASE_DIR}/Sniffles/snf/* > ${BASE_DIR}/Sniffles/SNIFFLES_samples.tsv
 mkdir -p ${BASE_DIR}/Sniffles/vcf
-OUTPUT_VCF=cohort_sniffles_het.vcf
+OUTPUT_VCF=${COHORT_NAME}_sniffles_het.vcf
 sniffles --input ${BASE_DIR}/Sniffles/SNIFFLES_samples.tsv --vcf ${OUTPUT_VCF}
 
 # split merged VCF by sample
 ml samtools
-bcftools +split ${OUTPUT_VCF} -o ${BASE_DIR}/Sniffles/vcf/cohort_het_sample_split
+bcftools +split ${OUTPUT_VCF} -o ${BASE_DIR}/Sniffles/vcf/${COHORT_NAME}_het_sample_split
