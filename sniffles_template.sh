@@ -35,8 +35,8 @@ COHORT_NAME=cohort
 ls ${BASE_DIR}/Sniffles/snf/* > ${BASE_DIR}/Sniffles/SNIFFLES_samples.tsv
 mkdir -p ${BASE_DIR}/Sniffles/vcf
 OUTPUT_VCF=${COHORT_NAME}_sniffles_het.vcf
-sniffles --input ${BASE_DIR}/Sniffles/SNIFFLES_samples.tsv --vcf ${OUTPUT_VCF}
+sniffles --input ${BASE_DIR}/Sniffles/SNIFFLES_samples.tsv --vcf ${BASE_DIR}/Sniffles/vcf/${OUTPUT_VCF}
 
 # split merged VCF by sample
 ml samtools
-bcftools +split ${OUTPUT_VCF} -o ${BASE_DIR}/Sniffles/vcf/${COHORT_NAME}_het_sample_split
+bcftools +split ${BASE_DIR}/Sniffles/vcf/${OUTPUT_VCF} -o ${BASE_DIR}/Sniffles/vcf/${COHORT_NAME}_het_sample_split
