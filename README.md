@@ -122,7 +122,7 @@ Usage: ./microarray_liftover_by_rsID_with_dbSNP.sh -d [dbSNP VCF] -r [reference 
 	-r Target reference name (optional)
 	-i Input microarray variant Plink bed file
 	-o Output rsID-based liftover microarray variant file (.vcf.gz)
-	-t Threads assigned to Plink and bcftools (optional)
+	-t Threads assigned to Plink and bcftools (optional, default 8)
 ```
 
 ## Alignment phasing
