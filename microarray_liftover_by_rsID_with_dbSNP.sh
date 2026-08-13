@@ -51,6 +51,8 @@ echo "Output liftover: ${output}"
 if [ ${threads} ]
 then
 	echo "Threads: ${threads}"
+else
+	threads=8
 fi 
 
 # get list of microarray rsIDs - always second column of Plink BED bim file
@@ -63,8 +65,7 @@ paste ${input}_microarray_variant_IDs_for_query.txt ${input}_microarray_variant_
 
 # query hg38 dbSNP to get table with new coordinates for liftover
 # probably rate limiting step in liftover - pretty slow to query all dbsnp
-bcftools query -i ID==@${input}_microarray_variant_IDs_corrected_names_for_query.txt -f "%CHROM\t%POS\t%ID\t%REF\t%ALT" ${dbsnp_variants} > \
-${input}_matches_corrected_names_to_dbSNP.tsv
+bcftools query -i ID==@${input}_microarray_variant_IDs_corrected_names_for_query.txt -f "%CHROM\t%POS\t%ID\t%REF\t%ALT" ${dbsnp_variants} > ${input}_matches_corrected_names_to_dbSNP.tsv
 
 # get rsID matches for later filtering in final liftover (only include rsIDs common between dbSNP and microarray batch1 for ACACB in final liftover)
 cut -f3 ${input}_matches_corrected_names_to_dbSNP.tsv > ${input}_matches_corrected_names_to_dbSNP_rsIDs.tsv
